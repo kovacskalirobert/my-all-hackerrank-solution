@@ -1,54 +1,23 @@
 
-
-data = set()
-
-
 def minion_game(string):
-    for i in range(len(string)):
-        row = string[i]
-        for j in range(len(string)):
-            col = string[j]
+    vowels = 'AEIOU'
+    
+    
+    strl = len(string)
 
-            data.add(string[i: (j + 1)])
-
-    data.remove("")
-
-    #  print(data, len(data))
-
-    vowels = []
-    consonants = []
-    game = dict()
-
-    for item in data:
-        if item[0] in "AEIOU":
-            vowels.append(item)
-        else:
-            consonants.append(item)
-
-    kevin_score = 0
-    for vowel in vowels:
-        # print(vowel)
-        indices = [index for index in range(
-            len(string)) if string.startswith(vowel, index)]
-        kevin_score += len(indices)
-    # print(kevin_score)
-
-    stuart_score = 0
-    for consonant in consonants:
-        # print(vowel)
-        indices = [index for index in range(
-            len(string)) if string.startswith(consonant, index)]
-        stuart_score += len(indices)
-    # print(stuart_score)
-
-    if kevin_score == stuart_score:
+    kevin = int(sum(strl-i for i in range(strl) if string[i] in vowels))
+    
+    stuart = int(strl*(strl + 1)/2 - kevin)
+    
+    if kevin == stuart:
         print("Draw")
-    elif kevin_score > stuart_score:
-        print(f"Kevin {kevin_score}")
-    elif stuart_score > kevin_score:
-        print(f"Stuart {stuart_score}")
+    elif kevin > stuart:
+        print(f"Kevin {kevin}")
+    elif stuart > kevin:
+        print(f"Stuart {stuart}")
 
 
 if __name__ == "__main__":
     s = "BANANA"
     minion_game(s)
+    
